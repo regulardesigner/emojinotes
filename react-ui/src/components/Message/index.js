@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './message.scss';
 
 const Message = () => {
-  const [message, setMessage] = useState("Coucou,")
+  // const [message, setMessage] = useState('');
+  const message = useSelector(state => state.message);
+  const dispatch = useDispatch();
   return (
     <div className="message">
       <p>Write your message</p>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          console.log({message})
+          dispatch({ type: 'test-dispatch'});
+          console.log({message});
         }}>
         <textarea
-          onChange={(event) => {setMessage(event.target.value)}}
+          onChange={(event) => {dispatch({ type: 'WRITE_MESSAGE', message: event.target.value})}}
           value={message}
           className="message-textarea"
           name="message"
