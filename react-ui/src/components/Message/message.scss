@@ -10,6 +10,12 @@
         outline: none;
     }
 
+    &-counter {
+        font-size: 12px;
+        text-align: right;
+        font-weight: bold;
+    }
+
     .btn {
         display: inline-block;
         width: 40%;

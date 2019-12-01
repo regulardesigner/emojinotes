@@ -24,6 +24,7 @@ const Message = () => {
           rows="8"
         >
         </textarea>
+        <div className="message-counter">{message.length}/200</div>
         <button className='btn' type='submit'>Submit</button>
       </form>
     </div>
