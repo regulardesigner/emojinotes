@@ -12,7 +12,7 @@ const Message = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          dispatch({ type: 'test-dispatch'});
+          dispatch({ type: 'SAVE_MESSAGE', flow: 'emopicker'});
           console.log({message});
         }}>
         <textarea

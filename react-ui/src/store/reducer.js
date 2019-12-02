@@ -1,11 +1,16 @@
 // Initial State
 const initialState = {
     message: 'Hello',
+    flow: 'home',
+    emo: null,
   };
   
   // Types
   const DO_SOMETHING = 'DO_SOMETHING';
   const WRITE_MESSAGE = 'WRITE_MESSAGE';
+  const START = 'START';
+  const SAVE_MESSAGE = 'SAVE_MESSAGE';
+  const EMO_PICKER = 'EMO_PICKER';
   
   // Reducer
   const reducer = (state = initialState, action = {}) => {
@@ -19,6 +24,21 @@ const initialState = {
         return {
           ...state,
           message: action.message,
+        }
+      case SAVE_MESSAGE:
+        return {
+          ...state,
+          flow: action.flow,
+        }
+      case START:
+        return {
+          ...state,
+          flow: action.flow,
+        }
+      case EMO_PICKER:
+        return {
+          ...state,
+          emo: action.emo,
         }
   
       default:

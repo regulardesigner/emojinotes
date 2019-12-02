@@ -1,9 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Home from '../Home';
 import Message from '../Message';
 import EmojiPicker from '../EmojiPicker';
 import './App.scss';
 
 const App = () => {
+  const flow = useSelector(state => state.flow);
+  const dispatch = useDispatch();
+
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [url, setUrl] = useState('/api');
@@ -33,13 +38,11 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          <span role='img' aria-label='Love Letter'>💌 </span>
-          <strong>EMOJI-NOTES</strong>
-        </p>
-        <small>2019 - <span role='img' aria-label='Robot'>🤖 </span>Created by regulardesigner</small>
-        <Message />
-        <EmojiPicker />
+        {
+          (flow === 'home' && <Home />)
+          || (flow === 'message' && <Message />)
+          || (flow === 'emopicker' && <EmojiPicker />)
+        }
       </header>
     </div>
   );
