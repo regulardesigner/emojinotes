@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './view.scss';
+
 const App = () => {
   const message = useSelector(state => state.message);
   const emo = useSelector(state => state.emo);
@@ -28,9 +30,9 @@ const App = () => {
   }
 
   return (
-    <div className="view">
-      <span role="img" aria-label={emo}>{emoji(emo)}</span>
-      <div>
+    <div className="view card">
+      <span className="card-emoji" role="img" aria-label={emo}>{emoji(emo)}</span>
+      <div className="card-message">
         {message}
       </div>
       <button onClick={(event) => console.log('SAVE')}>Save and share</button>

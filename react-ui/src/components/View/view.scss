@@ -1,0 +1,15 @@
+.card {
+    &-emoji {
+        font-size: 2.5em;
+    }
+    &-message {
+        display: block;
+        font-size: 1em;
+        padding: 40px;
+        max-width: 320px;
+        color: #282c34;
+        background-color: rgba($color: #FFFFFF, $alpha: 0.95);
+        border-radius: 5px;
+        font-style: italic;
+    }
+}
