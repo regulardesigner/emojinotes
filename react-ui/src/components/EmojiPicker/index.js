@@ -11,7 +11,7 @@ const EmojiPicker = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          dispatch({type: 'EMO_PICKER', emo: event.target.emo_picker.value})
+          dispatch({type: 'EMO_PICKER', emo: event.target.emo_picker.value, flow: 'view'})
         }}>
         <label htmlFor="love">
             <input type="radio" name='emo_picker' className='emo-picker-love' value='love' id='love'/>

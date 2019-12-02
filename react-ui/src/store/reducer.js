@@ -39,6 +39,7 @@ const initialState = {
         return {
           ...state,
           emo: action.emo,
+          flow: action.flow,
         }
   
       default:

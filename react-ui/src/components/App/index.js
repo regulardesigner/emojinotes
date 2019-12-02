@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Home from '../Home';
 import Message from '../Message';
 import EmojiPicker from '../EmojiPicker';
+import View from '../View';
 import './App.scss';
 
 const App = () => {
   const flow = useSelector(state => state.flow);
-  const dispatch = useDispatch();
-
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
   const [url, setUrl] = useState('/api');
@@ -42,6 +41,7 @@ const App = () => {
           (flow === 'home' && <Home />)
           || (flow === 'message' && <Message />)
           || (flow === 'emopicker' && <EmojiPicker />)
+          || (flow === 'view' && <View />)
         }
       </header>
     </div>
