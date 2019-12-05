@@ -1,0 +1,32 @@
+.emo-picker {
+    &-section {
+        margin-bottom: .5em;
+        label {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(#000, 0.4);
+
+            input[type="radio"] {
+                position: absolute;
+                top: 6px;
+                right: 6px;
+                &:checked {
+                    + span {
+                        box-shadow: 0 0 20px rgb(136, 136, 136) inset;
+                        background-color:white;
+                    }
+                }
+            }
+            span {
+                border: 4px solid rgba(#fff, 0.1);
+                background-color: rgba(#fff, 0.75);
+                display: inline-block;
+                padding: 25px;
+                border-radius: 8px;
+                font-size: 1.2em;
+            }
+        }
+    }
+}

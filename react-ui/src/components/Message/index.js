@@ -25,7 +25,8 @@ const Message = () => {
         >
         </textarea>
         <div className="message-counter">{message.length}/200</div>
-        <button className='btn' type='submit'>Submit</button>
+        <button className='btn' type='submit'>Done</button>
+        <p className="btn-legend"><small>Next, you'll pick an emoji! <span role='img' aria-label='Happy Face'>😊</span></small></p>
       </form>
     </div>
   );
