@@ -1,15 +1,19 @@
 .card {
+    position: relative;
     &-emoji {
+        position: absolute;
+        left: 40px;
+        top: calc(50% - .82em);
         font-size: 2.5em;
     }
     &-message {
         display: block;
         font-size: 1em;
-        padding: 40px;
+        padding: 40px 40px 40px 170px;
         max-width: 320px;
-        color: #282c34;
-        background-color: rgba($color: #FFFFFF, $alpha: 0.95);
+        color: #6a6d74;
+        background-color: hsla(0,0%,100%,.95);
         border-radius: 5px;
-        font-style: italic;
+        text-align: left;
     }
 }
