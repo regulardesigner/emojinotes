@@ -21,9 +21,12 @@ if (!isDev && cluster.isMaster) {
 
 } else {
   const app = express();
+  const Emojinotes = require('./routes/emojinotes');
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
+  app.use('/notes', Emojinotes);
 
   // Answer API requests.
   app.get('/api', function (req, res) {
