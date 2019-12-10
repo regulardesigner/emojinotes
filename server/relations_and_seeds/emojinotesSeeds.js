@@ -33,5 +33,5 @@ Emojinotes.bulkCreate([
     console.log(tokens);
 })
 .catch((err) => {
-    onsole.log("Error while Emojinotes creation : ", err)
+    console.log("Error while Emojinotes creation : ", err);
 });
