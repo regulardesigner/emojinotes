@@ -18,7 +18,14 @@ const App = () => {
   const flow = useSelector(state => state.flow);
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
+  const dispatch = useDispatch();
+
+  const getTokenInUrl = () => {
+    let token = window.location.pathname;
+    return token.replace('/n/', '');
+  }
+
+  const [url, setUrl] = useState('/emojinote/' + getTokenInUrl());
 
   const fetchData = useCallback(() => {
     fetch(url)
@@ -29,7 +36,7 @@ const App = () => {
         return response.json();
       })
       .then(json => {
-        setMessage(json.message);
+        dispatch({ type: 'LOAD_EMOJINOTE', message: json.note, emo: json.emoji });
         setIsFetching(false);
       }).catch(e => {
         setMessage(`API call failed: ${e}`);
@@ -41,11 +48,6 @@ const App = () => {
     setIsFetching(true);
     fetchData();
   }, [fetchData]);
-
-  const getTokenInUrl = () => {
-    let token = window.location.pathname;
-    return token.replace('/n/', '');
-  }
 
   return (
     <div className="App">
@@ -61,7 +63,7 @@ const App = () => {
             }
             </Route>
             <Route path='/n/:token'>
-              This is the note { getTokenInUrl() }
+              {isFetching ? 'Fetching your emojicard' : <View />}
             </Route>
           </Switch>
         </Router>

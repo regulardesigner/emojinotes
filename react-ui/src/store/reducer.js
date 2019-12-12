@@ -11,6 +11,7 @@ const initialState = {
   const START = 'START';
   const SAVE_MESSAGE = 'SAVE_MESSAGE';
   const EMO_PICKER = 'EMO_PICKER';
+  const LOAD_EMOJINOTE = 'LOAD_EMOJINOTE';
   
   // Reducer
   const reducer = (state = initialState, action = {}) => {
@@ -40,6 +41,12 @@ const initialState = {
           ...state,
           emo: action.emo,
           flow: action.flow,
+        }
+      case LOAD_EMOJINOTE:
+        return {
+          ...state,
+          emo: action.emo,
+          message: action.message,
         }
   
       default:
