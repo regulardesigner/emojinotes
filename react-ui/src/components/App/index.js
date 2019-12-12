@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
+
 import Home from '../Home';
 import Message from '../Message';
 import EmojiPicker from '../EmojiPicker';
@@ -34,15 +42,29 @@ const App = () => {
     fetchData();
   }, [fetchData]);
 
+  const getTokenInUrl = () => {
+    let token = window.location.pathname;
+    return token.replace('/n/', '');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        {
-          (flow === 'home' && <Home />)
-          || (flow === 'message' && <Message />)
-          || (flow === 'emopicker' && <EmojiPicker />)
-          || (flow === 'view' && <View />)
-        }
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+            {
+              (flow === 'home' && <Home />)
+              || (flow === 'message' && <Message />)
+              || (flow === 'emopicker' && <EmojiPicker />)
+              || (flow === 'view' && <View />)
+            }
+            </Route>
+            <Route path='/n/:token'>
+              This is the note { getTokenInUrl() }
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
