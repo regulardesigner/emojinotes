@@ -14,11 +14,17 @@
         font-size: 12px;
         text-align: right;
         font-weight: bold;
+        &--oversize {
+            font-size: 12px;
+            text-align: right;
+            font-weight: bold;
+            color: rgb(202, 18, 18);
+        }
     }
 
     .btn {
         display: inline-block;
         width: 40%;
-        margin: 0 auto; 
+        margin: 0 auto;
     }
 }

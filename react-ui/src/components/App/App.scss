@@ -37,3 +37,23 @@
   }
 
 }
+
+.toast {
+  position: absolute;
+  top: -100px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 10px 50px 0px black;
+  transition-property: top;
+  transition-timing-function: bounce;
+  transition-duration: .3s;
+  
+  &.show {
+    top: 50px;
+  }
+}
