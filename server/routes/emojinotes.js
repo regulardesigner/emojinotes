@@ -21,7 +21,7 @@ router.get('/:token', (req, res) => {
   Emojinotes.findOne({
       where: { token: req.params.token },
       attributes: { 
-          include: [ emoji, notes ] 
+          include: [ "emoji", "note" ] 
         }
   })
     .then((note) => {

@@ -26,7 +26,7 @@ if (!isDev && cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-  app.use('/notes', Emojinotes);
+  app.use('/n', Emojinotes);
 
   // Answer API requests.
   app.get('/api', function (req, res) {
