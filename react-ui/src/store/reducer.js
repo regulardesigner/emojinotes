@@ -34,6 +34,7 @@ const initialState = {
       case START:
         return {
           ...state,
+          message: '',
           flow: action.flow,
         }
       case EMO_PICKER:
