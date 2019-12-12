@@ -36,7 +36,7 @@ const Message = () => {
           <p className="btn-legend"><small>Next, you'll pick an emoji! <span role='img' aria-label='Happy Face'>😊</span></small></p>
         </form>
       </div>
-      <div className={message.length < 150 ? 'toast' : 'toast show'}>Your message is too long.</div>
+      <div className={message.length < 150 ? 'toast' : 'toast show'}><span role="img" aria-label="warning message too long">🚨</span> Your message is too long.</div>
     </>
   );
 }
