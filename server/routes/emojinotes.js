@@ -6,7 +6,7 @@ const models = require('../models');
 
 const Emojinotes = models.Emojinotes;
 
-// FETCH All wishes
+// GET All EMOJI-NOTES
 router.get('/', (req, res) => {
   Emojinotes.findAll()
   .then((notes) => {
@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
   });
 });
 
+// GET ONE EMOJI-NOTES WITH IT'S TOKEN
 router.get('/:token', (req, res) => {
   Emojinotes.findOne({
       where: { token: req.params.token },
@@ -34,5 +35,19 @@ router.get('/:token', (req, res) => {
     });
 });
 
+// SAVE A NEW EMOJI-NOTES
+router.post('/', (req, res) => {
+  const { emoji, note, token } = req.body;
+
+  const newEmojiNote = {
+    emoji,
+    note,
+    token,
+  };
+
+  Emojinotes.create(newEmojiNote).then((newlyCreatedEmojiNote) => {
+    res.json(newlyCreatedEmojiNote);
+  });
+});
 
 module.exports = router;

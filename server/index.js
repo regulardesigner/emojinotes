@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
@@ -26,13 +27,9 @@ if (!isDev && cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
+  // Allow request json body parsing.
+  app.use(bodyParser.json());
   app.use('/emojinote', Emojinotes);
-
-  // Answer API requests.
-  app.get('/api', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.send('{"message":"Welcome to emoji-note website."}');
-  });
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function(request, response) {
