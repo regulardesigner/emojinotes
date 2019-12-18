@@ -30,6 +30,7 @@ const initialState = {
         return {
           ...state,
           flow: action.flow,
+          token: action.token,
         }
       case START:
         return {

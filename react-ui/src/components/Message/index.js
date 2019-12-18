@@ -8,15 +8,31 @@ const Message = () => {
   const messageCounterClass = 'message-counter';
   const messageCounterClassRed = 'message-counter--oversize';
   const dispatch = useDispatch();
+  
+  // this function generate the ramdom token. 
+  const generateToken = () => {
+    const genToken = () => {
+      return Math.random().toString(36).substring(2, 10).toUpperCase();
+    };
+    return `${genToken()}-${genToken()}-${genToken()}`;
+  }
+
+  const isUnder = (num) => {
+    if (message.length <= num) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <>
       <div className="message">
-        <p>Write your message</p>
+      <p>Write your message</p>
         <form
           onSubmit={(event) => {
             event.preventDefault();
             if(message.length <= 150 ) {
-              dispatch({ type: 'SAVE_MESSAGE', flow: 'emopicker'});
+              dispatch({ type: 'SAVE_MESSAGE', flow: 'emopicker', token: generateToken()});
             } else {
               // alert('Sorry your message is too long...');
               // @TODO: use a toaster to show the message
@@ -31,12 +47,12 @@ const Message = () => {
             rows="8"
           >
           </textarea>
-          <div className={message.length < 150 ? messageCounterClass : messageCounterClassRed}>{message.length}/150</div>
+          <div className={isUnder(150) ? messageCounterClass : messageCounterClassRed}>{message.length}/150</div>
           <button className='btn' type='submit'>Done</button>
           <p className="btn-legend"><small>Next, you'll pick an emoji! <span role='img' aria-label='Happy Face'>😊</span></small></p>
         </form>
       </div>
-      <div className={message.length < 150 ? 'toast' : 'toast show'}><span role="img" aria-label="warning message too long">🚨</span> Your message is too long.</div>
+      <div className={isUnder(150) ? 'toast' : 'toast show'}><span role="img" aria-label="warning message too long">🚨</span> Your message is too long.</div>
     </>
   );
 }
