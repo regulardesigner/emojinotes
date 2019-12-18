@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
   };
 
   Emojinotes.create(newEmojiNote).then((newlyCreatedEmojiNote) => {
-    res.json(newlyCreatedEmojiNote);
+    res.json(newlyCreatedEmojiNote.token);
   });
 });
 

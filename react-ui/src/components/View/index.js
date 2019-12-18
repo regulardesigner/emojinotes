@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './view.scss';
+import { SAVE_NEW_NOTE } from '../../store/reducer';
 
 const App = () => {
   const message = useSelector(state => state.message);
@@ -35,7 +36,7 @@ const App = () => {
       <div className="card-message">
         {message}
       </div>
-      <button onClick={(event) => console.log('SAVE')}>Save and share</button>
+      <button className="btn" onClick={(event) => dispatch({ type: SAVE_NEW_NOTE})}>Save and share</button>
     </div>
   );
 
