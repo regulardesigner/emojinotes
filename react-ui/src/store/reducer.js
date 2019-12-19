@@ -5,7 +5,7 @@ const initialState = {
     emo: null,
   };
   
-  // Types
+  // ACTIONS TYPES
   const WRITE_MESSAGE = 'WRITE_MESSAGE';
   const START = 'START';
   // SAVE MESSAGE ISN'T AN APROPRIATE NAME FOR THIS ACTIONS TYPE
@@ -15,6 +15,7 @@ const initialState = {
   
   // EXPORTED ACTIONS TYPES FOR ANOTHER MIDDLEWARE
   export const SAVE_NEW_NOTE = 'SAVE_NEW_NOTE';
+  export const SHOW_QR_CODE = 'SHOW_QR_CODE';
   
   // Reducer
   const reducer = (state = initialState, action = {}) => {
@@ -48,7 +49,11 @@ const initialState = {
           emo: action.emo,
           message: action.message,
         }
-  
+      case SHOW_QR_CODE:
+        return {
+          ...state,
+          flow: action.flow,
+        }
       default:
         return state;
     }
