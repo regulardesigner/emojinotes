@@ -36,7 +36,7 @@ const App = () => {
       <div className="card-message">
         {message}
       </div>
-      <button className="btn" onClick={(event) => dispatch({ type: SAVE_NEW_NOTE})}>Save and share</button>
+      <button className="btn" onClick={(event) => dispatch({ type: SAVE_NEW_NOTE })}>Save and share</button>
     </div>
   );
 

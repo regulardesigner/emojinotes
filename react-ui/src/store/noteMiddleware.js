@@ -1,3 +1,4 @@
+import axios from 'axios';
 // IMPORT ACTIONS CREATORS
 import { SAVE_NEW_NOTE } from '../store/reducer';
 
@@ -6,17 +7,26 @@ const noteMiddleware = (store) => (next) => (action) => {
   // Je dois réagir uniquement à certains types d'action
   switch (action.type) {
     case SAVE_NEW_NOTE:
-      console.log("@SAVE_NEW_NOTE >>>> hello from the noteMiddleware");
-    // case FETCH_QQCHOSE:
-    //   axios.get(url)
-    //     .then(response => {
-    //       // Ici tu sais que tu as obtenu avec succès ta réponse
-    //       // Tu peux la récupérer dans response.data
-    //       const { data } = response.
-    //       // Il faut ensuite informer le reducer des nouvelles données reçues
-    //       store.dispatch(receivedQqchose(data));
-    //     })
-    //     .catch()
+      // GET THE STORE WITH store.getState()
+      const data = store.getState();
+      axios({
+        method: 'post',
+        url: '/emojinote',
+        data: {
+          emoji: data.emo,
+          note: data.message,
+          token: data.token
+        }
+      })
+      .then((response) => {
+        console.log(response);
+        // const { data } = response.
+        // // Il faut ensuite informer le reducer des nouvelles données reçues
+        // store.dispatch(receivedQqchose(data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
       break;
     default:
        next(action);
