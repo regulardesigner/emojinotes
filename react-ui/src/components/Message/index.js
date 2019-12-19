@@ -5,6 +5,7 @@ import './message.scss';
 const Message = () => {
   // const [message, setMessage] = useState('');
   const message = useSelector(state => state.message);
+  // CSS TO SHOW OR HIDE THE WARNINF TOASTER
   const messageCounterClass = 'message-counter';
   const messageCounterClassRed = 'message-counter--oversize';
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ const Message = () => {
               dispatch({ type: 'SAVE_MESSAGE', flow: 'emopicker', token: generateToken()});
             } else {
               // alert('Sorry your message is too long...');
-              // @TODO: use a toaster to show the message
             }
           }}>
           <textarea

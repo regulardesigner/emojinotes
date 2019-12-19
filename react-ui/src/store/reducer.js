@@ -1,26 +1,24 @@
 // Initial State
 const initialState = {
-    message: 'Hello',
+    message: '',
     flow: 'home',
     emo: null,
   };
   
   // Types
-  const DO_SOMETHING = 'DO_SOMETHING';
   const WRITE_MESSAGE = 'WRITE_MESSAGE';
   const START = 'START';
+  // SAVE MESSAGE ISN'T AN APROPRIATE NAME FOR THIS ACTIONS TYPE
   const SAVE_MESSAGE = 'SAVE_MESSAGE';
   const EMO_PICKER = 'EMO_PICKER';
   const LOAD_EMOJINOTE = 'LOAD_EMOJINOTE';
   
+  // EXPORTED ACTIONS TYPES FOR ANOTHER MIDDLEWARE
+  export const SAVE_NEW_NOTE = 'SAVE_NEW_NOTE';
+  
   // Reducer
   const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-      case DO_SOMETHING:
-        return {
-          ...state,
-          message: action.message,
-        };
       case WRITE_MESSAGE:
         return {
           ...state,
@@ -55,14 +53,6 @@ const initialState = {
         return state;
     }
   };
-  
-  // Action Creators
-  export const doSomething = message => ({
-    type: DO_SOMETHING,
-    message,
-  });
-  
-  // electors
   
   // Export
   export default reducer;
