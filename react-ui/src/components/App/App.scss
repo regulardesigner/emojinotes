@@ -9,6 +9,9 @@
   font-weight: bold;
   font-size: .6em;
   cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
 
   box-shadow: 4px 0 20px rgba($color: #000000, $alpha: .45);
   background: rgb(255, 196, 0);

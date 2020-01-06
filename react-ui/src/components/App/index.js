@@ -10,6 +10,7 @@ import Home from '../Home';
 import Message from '../Message';
 import EmojiPicker from '../EmojiPicker';
 import View from '../View';
+import Preview from '../preview';
 import './App.scss';
 
 const App = () => {
@@ -58,10 +59,11 @@ const App = () => {
               || (flow === 'message' && <Message />)
               || (flow === 'emopicker' && <EmojiPicker />)
               || (flow === 'view' && <View />)
+              || (flow === 'qr-code' && <Preview />)
             }
             </Route>
             <Route path='/n/:token'>
-              {isFetching ? 'Fetching your emojicard' : <View />}
+              {isFetching ? 'Fetching your emojicard' : <Preview />}
             </Route>
           </Switch>
         </Router>

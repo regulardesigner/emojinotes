@@ -1,8 +1,9 @@
 import axios from 'axios';
 // IMPORT ACTIONS CREATORS
-import { SAVE_NEW_NOTE } from '../store/reducer';
+import { SAVE_NEW_NOTE, SHOW_QR_CODE } from '../store/reducer';
 
 const noteMiddleware = (store) => (next) => (action) => {
+  // USING HOOKS TO DISPATCH ACTIONS
   // POUR EXEMPLE: Requetes avec Axios
   // Je dois réagir uniquement à certains types d'action
   switch (action.type) {
@@ -20,12 +21,13 @@ const noteMiddleware = (store) => (next) => (action) => {
       })
       .then((response) => {
         console.log(response);
+        // dispatch({ type: SHOW_QR_CODE, flow: 'qr-code', token: response.data})
         // const { data } = response.
         // // Il faut ensuite informer le reducer des nouvelles données reçues
-        // store.dispatch(receivedQqchose(data));
+        store.dispatch({ type: SHOW_QR_CODE, flow: 'qr-code' });
       })
       .catch((error) => {
-        console.log(error);
+        console.log('ERROR: ', error);
       });
       break;
     default:
