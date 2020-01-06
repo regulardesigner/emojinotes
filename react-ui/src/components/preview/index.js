@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import * as QRCode from 'easyqrcodejs';
 
 import './view.scss';
+import squaredImage from './square_white_bckgrnd.png';
 
 const Preview = () => {
   const message = useSelector(state => state.message);
   const emo = useSelector(state => state.emo);
   const token = useSelector(state => state.token);
-  const dispatch = useDispatch();
+
+  const qrcode = useRef(null);
+
+  useEffect(() => {
+    // qrcode Options
+    var options = {
+      text: `http://emojinotes.herokuapp.com/n/${token}`,
+      logo: `${squaredImage}`,
+      logoWidth:80, // widht. default is automatic width
+      logoHeight:80, // height. default is automatic height
+      logoBackgroundColor:'#fffff', // Logo backgroud color, Invalid when `logBgTransparent` is true; default is '#ffffff'
+    }
+    // Create new QRCode Object
+    new QRCode( qrcode.current, options);
+  });
 
   const emoji = (emoName) => {
     let result = '';
@@ -33,22 +48,22 @@ const Preview = () => {
 
 
   const copyToClipboard = str => {
-    const el = document.createElement('textarea');  // Create a <textarea> element
-    el.value = `http://emojinotes.herokuapp.com/n/${token}`;                                 // Set its value to the string that you want copied
-    el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
+    const el = document.createElement('textarea');            // Create a <textarea> element
+    el.value = `http://emojinotes.herokuapp.com/n/${token}`;  // Set its value to the string that you want copied
+    el.setAttribute('readonly', '');                          // Make it readonly to be tamper-proof
     el.style.position = 'absolute';                 
-    el.style.left = '-9999px';                      // Move outside the screen to make it invisible
-    document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
+    el.style.left = '-9999px';                                // Move outside the screen to make it invisible
+    document.body.appendChild(el);                            // Append the <textarea> element to the HTML document
     const selected =            
-      document.getSelection().rangeCount > 0        // Check if there is any content selected previously
-        ? document.getSelection().getRangeAt(0)     // Store selection if found
-        : false;                                    // Mark as false to know no selection existed before
-    el.select();                                    // Select the <textarea> content
-    document.execCommand('copy');                   // Copy - only works as a result of a user action (e.g. click events)
-    document.body.removeChild(el);                  // Remove the <textarea> element
-    if (selected) {                                 // If a selection existed before copying
-      document.getSelection().removeAllRanges();    // Unselect everything on the HTML document
-      document.getSelection().addRange(selected);   // Restore the original selection
+      document.getSelection().rangeCount > 0                  // Check if there is any content selected previously
+        ? document.getSelection().getRangeAt(0)               // Store selection if found
+        : false;                                              // Mark as false to know no selection existed before
+    el.select();                                              // Select the <textarea> content
+    document.execCommand('copy');                             // Copy - only works as a result of a user action (e.g. click events)
+    document.body.removeChild(el);                            // Remove the <textarea> element
+    if (selected) {                                           // If a selection existed before copying
+      document.getSelection().removeAllRanges();              // Unselect everything on the HTML document
+      document.getSelection().addRange(selected);             // Restore the original selection
     }
   };
 
@@ -58,8 +73,8 @@ const Preview = () => {
       <div className="card-message">
         {message}
       </div>
-      <Link to="/" className="btn">Create your own Emojinotes</Link>
       <button title="copy your emoji-note URL to clipboard" className="btn" onClick={copyToClipboard}>copy url to clipboard</button>
+      <div ref={qrcode}></div>
     </div>
   );
 
