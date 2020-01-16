@@ -74,6 +74,7 @@ const Preview = () => {
         {message}
       </div>
       <button title="copy your emoji-note URL to clipboard" className="btn" onClick={copyToClipboard}>copy url to clipboard</button>
+      <button>Show QR-Code</button>
       <div ref={qrcode}></div>
     </div>
   );

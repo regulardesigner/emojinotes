@@ -28,7 +28,7 @@ const Message = () => {
   return (
     <>
       <div className="message">
-      <p>Write your message</p>
+      <h2 className='title'>Write your message</h2>
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -43,8 +43,7 @@ const Message = () => {
             value={message}
             className="message-textarea"
             name="message"
-            cols="50"
-            rows="8"
+            placeholder="Enter your message here"
           >
           </textarea>
           <div className={isUnder(150) ? messageCounterClass : messageCounterClassRed}>{message.length}/150</div>

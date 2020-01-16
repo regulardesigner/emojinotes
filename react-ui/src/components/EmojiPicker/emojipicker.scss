@@ -1,3 +1,5 @@
+@import 'src/styles/vars';
+
 .emo-picker {
     &-section {
         margin-bottom: .5em;
@@ -25,7 +27,7 @@
                 display: inline-block;
                 padding: 25px;
                 border-radius: 8px;
-                font-size: 1.2em;
+                font-size: $picker;
             }
         }
     }

@@ -1,20 +1,27 @@
+@import 'src/styles/vars';
+
 .App {
   text-align: center;
 }
 
 .btn {
-  padding: 15px 24px;
+  display: inline-block;
   border-radius: 30px;
   border: 4px solid white;
+  padding: 15px 24px;
+  
   font-weight: bold;
-  font-size: .6em;
-  cursor: pointer;
-  display: inline-block;
+  font-size: $button;
   text-decoration: none;
+    
   color: black;
+  cursor: pointer;
+  
+  margin-bottom: $space-x1;
 
   box-shadow: 4px 0 20px rgba($color: #000000, $alpha: .45);
   background: rgb(255, 196, 0);
+  
   &:active {
     background: rgb(255, 174, 0);
   }
@@ -32,11 +39,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 
   small {
-    font-size: 12px;
+    font-size: 1.2em;
   }
 
 }
@@ -45,7 +51,7 @@
   position: absolute;
   top: -100px;
   text-align: center;
-  font-size: 14px;
+  font-size: $text-current;
   font-weight: bold;
   background-color: white;
   padding: 1rem 1.5rem;

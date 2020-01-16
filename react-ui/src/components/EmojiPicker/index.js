@@ -7,7 +7,7 @@ const EmojiPicker = () => {
   const dispatch = useDispatch();
   return (
     <div className="emo-picker">
-      <p>Choose wisely your emoji</p>
+      <h2 className="title">Choose wisely your emoji</h2>
       <form
         onSubmit={(event) => {
           event.preventDefault();
