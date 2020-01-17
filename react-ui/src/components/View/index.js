@@ -31,13 +31,15 @@ const App = () => {
   }
 
   return (
-    <div className="view card">
-      <span className="card-emoji" role="img" aria-label={emo}>{emoji(emo)}</span>
-      <div className="card-message">
-        {message}
+    <>
+      <div className="view card">
+        <span className="card-emoji" role="img" aria-label={emo}>{emoji(emo)}</span>
+        <div className="card-message">
+          {message}
+        </div>
       </div>
       <button className="btn" onClick={(event) => dispatch({ type: SAVE_NEW_NOTE })}>Save and share</button>
-    </div>
+    </>
   );
 
 }

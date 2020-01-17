@@ -5,7 +5,7 @@ import './message.scss';
 const Message = () => {
   // const [message, setMessage] = useState('');
   const message = useSelector(state => state.message);
-  // CSS TO SHOW OR HIDE THE WARNINF TOASTER
+  // CSS TO SHOW OR HIDE THE WARNING TOASTER
   const messageCounterClass = 'message-counter';
   const messageCounterClassRed = 'message-counter--oversize';
   const dispatch = useDispatch();

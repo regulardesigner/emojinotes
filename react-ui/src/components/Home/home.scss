@@ -1,12 +1,13 @@
 @import 'src/styles/vars';
 
 .title {
-    font-weight: bold;
+  font-weight: bold;
+  color: whitesmoke;
 }
 
 .baseline {
-    font-size: $text-current;
-    margin-bottom: $space-x2;
-    color: rgba(#fff, 0.8);
-    font-style: italic;
+  font-size: $text-current;
+  margin-bottom: $space-x2; 
+  color: rgba(#fff, 0.8);
+  font-style: italic;
 }
