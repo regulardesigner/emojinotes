@@ -1,23 +1,22 @@
 @import 'src/styles/vars';
 
 .message {
-
-    .title {
-        margin-top: $space-x1;
-    }
+  .title {
+    margin-top: $space-x1;
+  }
     
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 44px);
+  min-width: calc(100vw - 40px);
+
+  form {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: calc(100vh - 44px);
-    min-width: calc(100vw - 40px);
-
-    form {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    align-items: center;
+  }
 
     &-textarea {
         border: none;

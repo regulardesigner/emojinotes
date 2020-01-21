@@ -69,15 +69,23 @@ const Preview = () => {
 
   return (
     <>
+      <div className="toast show">Your emoji-note is saved!</div>
       <div className="view card">
         <span className="card-emoji" role="img" aria-label={emo}>{emoji(emo)}</span>
         <div className="card-message">
           {message}
         </div>
       </div>
-      <button title="copy your emoji-note URL to clipboard" className="btn" onClick={copyToClipboard}>copy url to clipboard</button>
-      <button>Show QR-Code</button>
+      <button title="Copy Emoji-note URL to clipboard" className="btn" onClick={copyToClipboard}>copy url to clipboard</button>
+      <button className="btn">Show QR-Code</button>
       <div ref={qrcode}></div>
+      <section>
+        <h2>How to share my emoji-note?</h2>
+        <ul>
+          <li>Send the generated url to your friend.</li>
+          <li>Show the generated QR-code to your friend on a sheet of paper or on your device.</li>
+        </ul>
+      </section>
     </>
   );
 

@@ -31,7 +31,7 @@ const EmojiPicker = () => {
               <span role='img' aria-label='Face With Tears of Joy'>😂</span>
           </label>
         </section>
-        <button className='btn' type='submit'>Save your message</button>
+        <button className='btn' type='submit'>Look at your Emoji-note</button>
         <p className="btn-legend"><small>Next, you'll see your emoji-notes!</small></p>
       </form>
     </div>
