@@ -1,0 +1,21 @@
+.actions-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+  position: absolute;
+}
+
+.qr-code {
+  background-color: white;
+  padding: 1rem;
+  border-radius: .6rem;
+  // not realy happy about that particular line...
+  box-shadow: 0px 0px 0px 5000px white;
+}

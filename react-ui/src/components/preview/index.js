@@ -9,12 +9,14 @@ const Preview = () => {
   const message = useSelector(state => state.message);
   const emo = useSelector(state => state.emo);
   const token = useSelector(state => state.token);
+  const qrStatus = useSelector(state => state.qrcode);
 
-  const qrcode = useRef(null);
+  const dispatch = useDispatch();
+
+  const qr = useRef(null);
 
   useEffect(() => {
-    // qrcode Options
-    var options = {
+    const options = {
       text: `http://emojinotes.herokuapp.com/n/${token}`,
       logo: `${squaredImage}`,
       logoWidth:80, // widht. default is automatic width
@@ -22,7 +24,13 @@ const Preview = () => {
       logoBackgroundColor:'#fffff', // Logo backgroud color, Invalid when `logBgTransparent` is true; default is '#ffffff'
     }
     // Create new QRCode Object
-    new QRCode( qrcode.current, options);
+    let qrCodeGen = new QRCode(qr.current, options);
+    // qrcode Options
+    if(qrStatus) {
+      qrCodeGen.makeCode(`http://emojinotes.herokuapp.com/n/${token}`);
+    } else {
+      qrCodeGen.clear();
+    }
   });
 
   const emoji = (emoName) => {
@@ -67,25 +75,37 @@ const Preview = () => {
     }
   };
 
+  const openQrCode = () => {
+    qrStatus 
+    ? dispatch({type: 'TOGGLE_QR', qrcode: false})
+    : dispatch({type: 'TOGGLE_QR', qrcode: true});
+  }
+
+  const qrClass = () => {
+    let classTag;
+    qrStatus
+    ? classTag = 'show'
+    : classTag = 'hide'
+    return classTag;
+  }
+
   return (
     <>
       <div className="toast show">Your emoji-note is saved!</div>
       <div className="view card">
-        <span className="card-emoji" role="img" aria-label={emo}>{emoji(emo)}</span>
+        <span className="card-emoji" rol="img" aria-label={emo}>{emoji(emo)}</span>
         <div className="card-message">
           {message}
         </div>
       </div>
-      <button title="Copy Emoji-note URL to clipboard" className="btn" onClick={copyToClipboard}>copy url to clipboard</button>
-      <button className="btn">Show QR-Code</button>
-      <div ref={qrcode}></div>
-      <section>
-        <h2>How to share my emoji-note?</h2>
-        <ul>
-          <li>Send the generated url to your friend.</li>
-          <li>Show the generated QR-code to your friend on a sheet of paper or on your device.</li>
-        </ul>
-      </section>
+      <div className="actions-btn">
+        <button title="Copy Emoji-note URL to clipboard" className="btn spaced" onClick={copyToClipboard}><span role="img" aria-label="Clipboard">📋 </span> copy url to clipboard</button>
+        <button className="btn" onClick={openQrCode}>Show QR-Code</button>
+      </div>
+      <div className={qrClass()}>
+        <div className="qr-code" ref={qr}></div>
+        <button className="btn" onClick={openQrCode}>Hide QR-Code</button>
+      </div>
     </>
   );
 

@@ -3,6 +3,7 @@ const initialState = {
     message: '',
     flow: 'home',
     emo: null,
+    qrcode: false,
   };
   
   // ACTIONS TYPES
@@ -12,6 +13,9 @@ const initialState = {
   const SAVE_MESSAGE = 'SAVE_MESSAGE';
   const EMO_PICKER = 'EMO_PICKER';
   const LOAD_EMOJINOTE = 'LOAD_EMOJINOTE';
+
+  // TOGGLE QR-CODE
+  const TOGGLE_QR = 'TOGGLE_QR';
   
   // EXPORTED ACTIONS TYPES FOR ANOTHER MIDDLEWARE
   export const SAVE_NEW_NOTE = 'SAVE_NEW_NOTE';
@@ -53,6 +57,11 @@ const initialState = {
         return {
           ...state,
           flow: action.flow,
+        }
+      case TOGGLE_QR:
+        return {
+          ...state,
+          qrcode: action.qrcode,
         }
       default:
         return state;
