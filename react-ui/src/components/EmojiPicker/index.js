@@ -7,7 +7,7 @@ const EmojiPicker = () => {
   const dispatch = useDispatch();
   return (
     <div className="emo-picker">
-      <p>Choose wisely your emoji</p>
+      <h2 className="title">Choose wisely your emoji</h2>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -31,7 +31,7 @@ const EmojiPicker = () => {
               <span role='img' aria-label='Face With Tears of Joy'>😂</span>
           </label>
         </section>
-        <button className='btn' type='submit'>Save your message</button>
+        <button className='btn' type='submit'>Look at your Emoji-note</button>
         <p className="btn-legend"><small>Next, you'll see your emoji-notes!</small></p>
       </form>
     </div>

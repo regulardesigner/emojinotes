@@ -5,7 +5,7 @@ import './message.scss';
 const Message = () => {
   // const [message, setMessage] = useState('');
   const message = useSelector(state => state.message);
-  // CSS TO SHOW OR HIDE THE WARNINF TOASTER
+  // CSS TO SHOW OR HIDE THE WARNING TOASTER
   const messageCounterClass = 'message-counter';
   const messageCounterClassRed = 'message-counter--oversize';
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Message = () => {
   return (
     <>
       <div className="message">
-      <p>Write your message</p>
+        <h2 className='title'>Write your message</h2>
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -43,8 +43,7 @@ const Message = () => {
             value={message}
             className="message-textarea"
             name="message"
-            cols="50"
-            rows="8"
+            placeholder="Enter your message here"
           >
           </textarea>
           <div className={isUnder(150) ? messageCounterClass : messageCounterClassRed}>{message.length}/150</div>
@@ -52,7 +51,10 @@ const Message = () => {
           <p className="btn-legend"><small>Next, you'll pick an emoji! <span role='img' aria-label='Happy Face'>😊</span></small></p>
         </form>
       </div>
-      <div className={isUnder(150) ? 'toast' : 'toast show'}><span role="img" aria-label="warning message too long">🚨</span> Your message is too long.</div>
+      <div className={isUnder(150) ? 'toast' : 'toast show'}>
+        <span role="img" aria-label="warning message too long">🚨</span>
+        Your message is too long.
+      </div>
     </>
   );
 }

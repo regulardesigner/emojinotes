@@ -1,19 +1,21 @@
-.card {
-    position: relative;
-    &-emoji {
-        position: absolute;
-        left: 40px;
-        top: calc(50% - .82em);
-        font-size: 2.5em;
-    }
-    &-message {
-        display: block;
-        font-size: 1em;
-        padding: 40px 40px 40px 170px;
-        max-width: 320px;
-        color: #6a6d74;
-        background-color: hsla(0,0%,100%,.95);
-        border-radius: 5px;
-        text-align: left;
-    }
+.actions-btn {
+  display: flex;
+  flex-direction: row;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+  position: absolute;
+}
+
+.qr-code {
+  background-color: white;
+  padding: 1rem;
+  border-radius: .6rem;
+  // not realy happy about that particular line...
+  box-shadow: 0px 0px 0px 5000px white;
 }

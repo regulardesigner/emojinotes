@@ -1,0 +1,21 @@
+@import 'reset';
+@import 'vars';
+
+body {
+  font-size: 62.5%;
+  margin: 0;
+  padding: 0;
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h1 {
+    margin-bottom: $space-x2;
+    font-size: $title-h1;
+  }
+
+  h2 {
+    margin-bottom: $space-x1;
+    font-size: $title-h2;
+  }
+}
