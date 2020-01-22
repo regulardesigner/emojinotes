@@ -1,0 +1,24 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: hsla(0,0%,100%,.95);
+    border-radius: 5px;
+    max-width: 500px;
+    margin-bottom: 1rem;
+
+    &-emoji {
+        font-size: 4em;
+        padding: 2rem;
+    }
+    &-message {
+        font-size: 2em;
+        display: block;
+        color: #6a6d74;
+        text-align: left;
+        line-height: 1.4em;
+        padding: 2rem 2rem 2rem 0rem;
+    }
+}
+

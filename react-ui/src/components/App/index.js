@@ -12,6 +12,7 @@ import EmojiPicker from '../EmojiPicker';
 import View from '../View';
 import Preview from '../preview';
 import './App.scss';
+import GetEmojinotes from '../GetEmojinote';
 
 const App = () => {
   const flow = useSelector(state => state.flow);
@@ -62,7 +63,7 @@ const App = () => {
           }
           </Route>
           <Route path='/n/:token'>
-            {isFetching ? 'Fetching your emojicard' : <Preview />}
+            {isFetching ? 'Fetching your emojicard' : <GetEmojinotes />}
           </Route>
         </Switch>
       </Router>
