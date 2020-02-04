@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as QRCode from 'easyqrcodejs';
 
 import './view.scss';
-import squaredImage from './square_white_bckgrnd.png';
+//import squaredImage from './square_white_bckgrnd.png';
 
 const Preview = () => {
   const message = useSelector(state => state.message);
@@ -16,9 +16,17 @@ const Preview = () => {
   const qr = useRef(null);
 
   useEffect(() => {
-    const options = {
+      //
+      const ctx = document.getElementById('canvas').getContext('2d');
+      // 
+      ctx.font = "64px serif";
+      ctx.fillText(emoji(emo), 0, 64);
+      //
+      const emojImage = ctx.canvas.toDataURL('image/png', 1.0);
+      //
+      const options = {
       text: `http://emojinotes.herokuapp.com/n/${token}`,
-      logo: `${squaredImage}`,
+      logo: `${emojImage}`,
       logoWidth:80, // widht. default is automatic width
       logoHeight:80, // height. default is automatic height
       logoBackgroundColor:'#fffff', // Logo backgroud color, Invalid when `logBgTransparent` is true; default is '#ffffff'
@@ -53,7 +61,6 @@ const Preview = () => {
     }
     return result;
   }
-
 
   const copyToClipboard = str => {
     const el = document.createElement('textarea');            // Create a <textarea> element
@@ -106,6 +113,7 @@ const Preview = () => {
         <div className="qr-code" ref={qr}></div>
         <button className="btn" onClick={openQrCode}>Hide QR-Code</button>
       </div>
+      <canvas id="canvas" width="80" height="80" class="playable-canvas hide"></canvas>
     </>
   );
 
