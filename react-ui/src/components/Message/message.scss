@@ -37,6 +37,7 @@
         text-align: right;
         font-weight: bold;
         width: 100%;
+        color: white;
         margin-top: $space-x05;
         margin-bottom: $space-x05;
         &--oversize {
@@ -44,7 +45,7 @@
             text-align: right;
             font-weight: bold;
             width: 100%;
-            color: rgb(202, 18, 18);
+            color: rgb(252, 42, 42);
             margin-top: $space-x05;
             margin-bottom: $space-x05;
         }
