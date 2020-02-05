@@ -1,9 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as QRCode from 'easyqrcodejs';
 
 import './view.scss';
-//import squaredImage from './square_white_bckgrnd.png';
 
 const Preview = () => {
   const message = useSelector(state => state.message);
@@ -11,20 +10,25 @@ const Preview = () => {
   const token = useSelector(state => state.token);
   const qrStatus = useSelector(state => state.qrcode);
 
+  const [toasterClass, setToasterClass] = useState('toast');
+  const [isToastShowed, setIsToastShowed] = useState(false);
+
   const dispatch = useDispatch();
 
   const qr = useRef(null);
 
   useEffect(() => {
-      //
-      const ctx = document.getElementById('canvas').getContext('2d');
-      // 
-      ctx.font = "64px serif";
-      ctx.fillText(emoji(emo), 0, 64);
-      //
-      const emojImage = ctx.canvas.toDataURL('image/png', 1.0);
-      //
-      const options = {
+    // get the canvas
+    const ctx = document.getElementById('canvas').getContext('2d');
+    // text params
+    ctx.font = "42px serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(emoji(emo), 40, 40);
+    // get the encoded images from the canvas
+    const emojImage = ctx.canvas.toDataURL('image/png', 1.0);
+    //
+    const options = {
       text: `http://emojinotes.herokuapp.com/n/${token}`,
       logo: `${emojImage}`,
       logoWidth:80, // widht. default is automatic width
@@ -82,12 +86,14 @@ const Preview = () => {
     }
   };
 
+  // dispatch the qr code event
   const openQrCode = () => {
     qrStatus 
     ? dispatch({type: 'TOGGLE_QR', qrcode: false})
     : dispatch({type: 'TOGGLE_QR', qrcode: true});
   }
 
+  // add show / hide class on qr-code preview
   const qrClass = () => {
     let classTag;
     qrStatus
@@ -96,9 +102,24 @@ const Preview = () => {
     return classTag;
   }
 
+  // show and hide toater
+  const showToaster = () => {
+    setToasterClass('toast show');
+    setIsToastShowed(true);
+    window.setTimeout(hideToaster, 2500);
+  }
+
+  const hideToaster = () => {
+    setToasterClass('toast');
+    window.clearTimeout();
+  }
+
+  isToastShowed || window.setTimeout(showToaster, 500);
+
   return (
     <>
-      <div className="toast show">Your emoji-note is saved!</div>
+      <div className={toasterClass}><span role="img" aria-label="Saved into Disk">💾</span> Your emoji-note is saved!</div>
+      <h2 className='title'>Share your Emoji note!</h2>
       <div className="view card">
         <span className="card-emoji" rol="img" aria-label={emo}>{emoji(emo)}</span>
         <div className="card-message">
@@ -113,7 +134,7 @@ const Preview = () => {
         <div className="qr-code" ref={qr}></div>
         <button className="btn" onClick={openQrCode}>Hide QR-Code</button>
       </div>
-      <canvas id="canvas" width="80" height="80" class="playable-canvas hide"></canvas>
+      <canvas id="canvas" width="80" height="80" className="playable-canvas hide"></canvas>
     </>
   );
 
