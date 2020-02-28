@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './home.scss';
 
@@ -12,7 +13,12 @@ const Home = () => {
           <strong>EMOJI-NOTES</strong>
       </h1>
       <p className="baseline">Send nice messages to your friends!</p>
-      <button className='btn' onClick={(event) => {dispatch({type: 'START', flow: 'message'})}}>Create an emoji-note today!</button>
+      <Link
+        to='/new'
+        className='btn'
+        onClick={(event) => {dispatch({type: 'START', flow: 'message'})}}
+      >Create an emoji-note today!
+      </Link>
       <p className="btn-legend"><small>2020 - <span role='img' aria-label='Robot'>🤖 </span>Created by regulardesigner</small></p>
     </>
   );
