@@ -1,9 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import emojis from '../../emojis';
+
 import './emojipicker.scss';
 
 const EmojiPicker = () => {
+  console.log(emojis);
   const dispatch = useDispatch();
   return (
     <div className="emo-picker">
@@ -32,7 +35,7 @@ const EmojiPicker = () => {
           </label>
         </section>
         <button className='btn' type='submit'>Look at your Emoji-note</button>
-        <p className="btn-legend"><small>Next, you'll see your emoji-notes!</small></p>
+        <p className="btn-legend"><small>Next, you'll see your emoji-note!</small></p>
       </form>
     </div>
   );

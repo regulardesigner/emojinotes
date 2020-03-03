@@ -28,7 +28,8 @@ const App = () => {
           </Route>
           <Route path='/new'>
           {
-            (flow === 'message' && <Message />)
+            (flow === 'home' && <Message />)
+            || (flow === 'message' && <Message />)
             || (flow === 'emopicker' && <EmojiPicker />)
             || (flow === 'view' && <View />)
             || (flow === 'qr-code' && <Preview />)
