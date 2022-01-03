@@ -10,6 +10,7 @@ const noteMiddleware = (store) => (next) => (action) => {
     case SAVE_NEW_NOTE:
       // GET THE STORE WITH store.getState()
       const data = store.getState();
+      debugger
       axios({
         method: 'post',
         url: '/emojinote',
@@ -20,13 +21,14 @@ const noteMiddleware = (store) => (next) => (action) => {
         }
       })
       .then((response) => {
+        debugger
         console.log(response);
         // dispatch({ type: SHOW_QR_CODE, flow: 'qr-code', token: response.data})
         // const { data } = response.
-        // // Il faut ensuite informer le reducer des nouvelles données reçues
         store.dispatch({ type: SHOW_QR_CODE, flow: 'qr-code' });
       })
       .catch((error) => {
+        debugger
         console.log('ERROR: ', error);
       });
       break;

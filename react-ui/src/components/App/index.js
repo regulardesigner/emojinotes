@@ -1,43 +1,27 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
 
 // local import
 // components:
 import Home from '../Home';
-import Message from '../Message';
-import EmojiPicker from '../EmojiPicker';
-import View from '../View';
-import Preview from '../preview';
+import New from '../New';
 import GetEmojinotes from '../GetEmojinote';
 // stylesheet:
 import './App.scss';
 
 const App = () => {
-  const flow = useSelector(state => state.flow);
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/new'>
-          {
-            (flow === 'message' && <Message />)
-            || (flow === 'emopicker' && <EmojiPicker />)
-            || (flow === 'view' && <View />)
-            || (flow === 'qr-code' && <Preview />)
-          }
-          </Route>
-          <Route path='/n/:token'>
-            <GetEmojinotes />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path='/' element={ <Home/> } />
+          <Route path='/new' element= { <New/> } />
+          <Route path='/n/:token' element={ <GetEmojinotes /> } />
+        </Routes>
       </Router>
     </div>
   );
