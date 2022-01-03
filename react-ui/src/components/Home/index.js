@@ -19,7 +19,7 @@ const Home = () => {
         onClick={(event) => {dispatch({type: 'START', flow: 'message'})}}
       >Create an emoji-note today!
       </Link>
-      <p className="btn-legend"><small>2020 - <span role='img' aria-label='Robot'>🤖 </span>Created by regulardesigner</small></p>
+      <p className="btn-legend"><small>2022 - <span role='img' aria-label='Robot'>🤖 </span>Created by regulardesigner</small></p>
     </>
   );
 }
