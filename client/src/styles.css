@@ -1,0 +1,381 @@
+:root {
+  --color-bg: #282c34;
+  --color-text: #f5f5f5;
+  --color-text-muted: rgb(255 255 255 / 0.75);
+  --color-cta: #ffc400;
+  --color-cta-hover: #ffce65;
+  --color-cta-active: #ffae00;
+  --color-card: rgb(255 255 255 / 0.95);
+  --color-card-text: #4a4d54;
+  --color-error: #ff6b6b;
+  --radius: 0.5rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --shadow: 0 4px 20px rgb(0 0 0 / 0.45);
+  --focus-ring: 0 0 0 3px var(--color-bg), 0 0 0 6px var(--color-cta);
+
+  color-scheme: dark;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1,
+p,
+figure,
+blockquote,
+fieldset {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Headings receive focus programmatically on page and step changes. */
+h1[tabindex='-1']:focus {
+  box-shadow: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 100dvh;
+  padding: var(--space-3) var(--space-2);
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.baseline {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.legend {
+  color: var(--color-text-muted);
+}
+
+.legend-link {
+  color: var(--color-text-muted);
+}
+
+.error {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  border: 4px solid white;
+  border-radius: 999px;
+  background: var(--color-cta);
+  color: black;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background-color 0.15s;
+
+  &:hover {
+    background: var(--color-cta-hover);
+  }
+
+  &:active {
+    background: var(--color-cta-active);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-text);
+  box-shadow: none;
+
+  &:hover,
+  &:active {
+    background: rgb(255 255 255 / 0.1);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* Creation flow */
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: min(100%, 36rem);
+}
+
+.message-textarea {
+  width: 100%;
+  min-height: 12rem;
+  padding: var(--space-2);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: rgb(255 255 255 / 0.15);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1.25rem;
+  text-align: center;
+  resize: vertical;
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--color-error);
+  }
+}
+
+.counter {
+  align-self: flex-end;
+  font-weight: 700;
+}
+
+.counter--error {
+  color: var(--color-error);
+}
+
+.emoji-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0;
+  border: 0;
+
+  & legend {
+    width: 100%;
+    margin-bottom: var(--space-2);
+  }
+}
+
+.emoji-option {
+  padding: 1.25rem;
+  border: 4px solid rgb(255 255 255 / 0.1);
+  border-radius: var(--radius);
+  background: rgb(255 255 255 / 0.75);
+  font-size: 3rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:has(input:checked) {
+    border-color: var(--color-cta);
+    background: white;
+    transform: scale(1.08);
+  }
+
+  &:has(input:focus-visible) {
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* Emoji-note card */
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: min(100%, 32rem);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-card);
+  box-shadow: var(--shadow);
+}
+
+.card-emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.card-message {
+  color: var(--color-card-text);
+  font-size: 1.25rem;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (width < 30rem) {
+  .card {
+    flex-direction: column;
+    gap: var(--space-2);
+
+    & .card-message {
+      text-align: center;
+    }
+  }
+}
+
+/* Share step */
+
+.share-url {
+  width: 100%;
+  padding: 0.75rem var(--space-2);
+  border: 0;
+  border-radius: var(--radius);
+  background: rgb(255 255 255 / 0.15);
+  color: var(--color-text);
+  font: inherit;
+  text-align: center;
+}
+
+.qr-code {
+  position: relative;
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  background: white;
+  line-height: 0;
+}
+
+.qr-code-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background: white;
+  font-size: 2.5rem;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* Toast */
+
+.toast {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 10;
+  padding: var(--space-2) 1.5rem;
+  border-radius: var(--radius);
+  background: white;
+  color: black;
+  font-weight: 700;
+  transform: translate(-50%, -150%);
+  transition: transform 0.3s;
+
+  &.show {
+    box-shadow: 0 10px 50px black;
+    transform: translate(-50%, var(--space-3));
+  }
+}
+
+/* Loader */
+
+.loader {
+  display: flex;
+  gap: 0.75rem;
+
+  & .dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: white;
+    animation: pulse 0.9s infinite ease-in-out;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(0.4);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

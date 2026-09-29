@@ -1,0 +1,10 @@
+{
+  "name": "Emoji-notes",
+  "short_name": "Emoji-notes",
+  "description": "Send nice messages to your friends!",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#282c34",
+  "background_color": "#282c34",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

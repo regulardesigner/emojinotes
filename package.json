@@ -1,37 +1,43 @@
 {
-  "name": "heroku-cra-node",
-  "version": "3.0.0",
-  "description": "How to use create-react-app with a custom Node API on Heroku",
+  "name": "emojinotes",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Send secret emoji notes to your friends through a private link or a QR code.",
+  "license": "MIT",
+  "type": "module",
   "engines": {
-    "node": "10.x"
+    "node": ">=22.18"
   },
-  "scripts": {
-    "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "react-ui/node_modules"
+  "workspaces": [
+    "client",
+    "server"
   ],
-  "dependencies": {
-    "axios": "^0.24.0",
-    "body-parser": "^1.19.1",
-    "express": "^4.17.2",
-    "mysql2": "^2.3.3",
-    "pg": "^8.7.1",
-    "sequelize": "^6.12.4",
-    "sequelize-cli": "^6.3.0"
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm start -w server",
+    "test": "npm test --workspaces",
+    "lint": "eslint client server/src server/test",
+    "typecheck": "npm run typecheck -w client",
+    "format": "prettier --write client server/src server/test *.md *.js package.json .github",
+    "format:check": "prettier --check client server/src server/test *.md *.js package.json .github",
+    "check": "npm run lint && npm run format:check && npm run typecheck && npm test && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mars/heroku-cra-node.git"
+    "url": "https://github.com/regulardesigner/emojinotes.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
-  "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.11.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "typescript-eslint": "^8.71.0"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
 }

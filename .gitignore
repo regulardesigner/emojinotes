@@ -1,12 +1,14 @@
-# Node build artifacts
+# Dependencies & build output
 node_modules
-npm-debug.log
+dist
+coverage
+*.log
 
-# Local development
+# Local environment & data
+.env
 *.env
-*.dev
-.DS_Store
+!.env.example
+*.sqlite
 
-# Docker
-Dockerfile
-docker-compose.yml
+# OS / editors
+.DS_Store
