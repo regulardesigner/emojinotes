@@ -54,7 +54,7 @@ describe('NewNote', () => {
     );
 
     await user.click(screen.getByRole('button', { name: 'Show QR code' }));
-    expect(screen.getByTitle('QR code linking to your emoji-note')).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Scan to open your emoji-note' })).toBeVisible();
   });
 
   it('shows an error and lets the user retry when saving fails', async () => {

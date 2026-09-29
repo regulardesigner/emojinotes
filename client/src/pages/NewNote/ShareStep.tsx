@@ -1,5 +1,5 @@
 import { QRCodeSVG } from 'qrcode.react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 
 import { EmojiCard } from '../../components/EmojiCard';
@@ -16,7 +16,7 @@ interface ShareStepProps {
 
 export function ShareStep({ emoji, message, url, justCreated }: ShareStepProps) {
   const [toast, setToast] = useState<ToastMessage | null>(null);
-  const [showQrCode, setShowQrCode] = useState(false);
+  const qrDialog = useRef<HTMLDialogElement>(null);
   const canShare = typeof navigator.share === 'function';
 
   // Set after mount: screen readers only announce live region changes, not initial content.
@@ -68,29 +68,46 @@ export function ShareStep({ emoji, message, url, justCreated }: ShareStepProps) 
         <button
           className="btn"
           type="button"
-          aria-expanded={showQrCode}
-          aria-controls="qr-code"
-          onClick={() => setShowQrCode((value) => !value)}
+          aria-haspopup="dialog"
+          onClick={() => qrDialog.current?.showModal()}
         >
-          {showQrCode ? 'Hide QR code' : 'Show QR code'}
+          Show QR code
         </button>
       </div>
 
-      {showQrCode && (
-        <div id="qr-code" className="qr-code">
-          {/* Level H error correction keeps the code readable under the emoji overlay. */}
-          <QRCodeSVG
-            value={url}
-            size={240}
-            level="H"
-            marginSize={2}
-            title="QR code linking to your emoji-note"
-          />
-          <span className="qr-code-emoji" aria-hidden="true">
-            {findEmoji(emoji)?.char}
-          </span>
+      {/* Native modal dialog: traps focus, closes with Escape, makes the page inert,
+          and gives focus back to the "Show QR code" button when closed. */}
+      <dialog
+        ref={qrDialog}
+        className="qr-dialog"
+        aria-labelledby="qr-dialog-title"
+        onClick={(event) => {
+          // A click on the dialog element itself (not its content) is a click on the backdrop.
+          if (event.target === event.currentTarget) event.currentTarget.close();
+        }}
+      >
+        <div className="qr-dialog-content">
+          <h2 id="qr-dialog-title" className="qr-dialog-title">
+            Scan to open your emoji-note
+          </h2>
+          <div className="qr-code">
+            {/* Level H error correction keeps the code readable under the emoji overlay. */}
+            <QRCodeSVG
+              value={url}
+              size={240}
+              level="H"
+              marginSize={2}
+              title="QR code linking to your emoji-note"
+            />
+            <span className="qr-code-emoji" aria-hidden="true">
+              {findEmoji(emoji)?.char}
+            </span>
+          </div>
+          <button className="btn" type="button" onClick={() => qrDialog.current?.close()}>
+            Close
+          </button>
         </div>
-      )}
+      </dialog>
 
       <Link to="/" className="legend-link">
         Back to home

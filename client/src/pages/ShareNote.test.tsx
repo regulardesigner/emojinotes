@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -39,6 +40,36 @@ describe('ShareNote', () => {
 
     expect(await screen.findByText('📋 Link copied to clipboard!')).toBeInTheDocument();
     expect(writeText).toHaveBeenCalledWith(`${window.location.origin}/n/abc123XYZ`);
+  });
+
+  it('opens the QR code in a modal dialog that can be closed with the keyboard', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ emoji: 'love letter', note: 'Hey' }));
+    const user = userEvent.setup();
+    renderAt('/share/abc123XYZ');
+
+    const trigger = await screen.findByRole('button', { name: 'Show QR code' });
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    await user.click(trigger);
+    const dialog = screen.getByRole('dialog', { name: 'Scan to open your emoji-note' });
+    expect(dialog).toHaveAttribute('open');
+    expect(screen.getByTitle('QR code linking to your emoji-note')).toBeInTheDocument();
+
+    const close = screen.getByRole('button', { name: 'Close' });
+    expect(close).toHaveFocus();
+    await user.keyboard('{Enter}');
+    expect(dialog).not.toHaveAttribute('open');
+  });
+
+  it('closes the QR code dialog when clicking the backdrop', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(jsonResponse({ emoji: 'love letter', note: 'Hey' }));
+    const user = userEvent.setup();
+    renderAt('/share/abc123XYZ');
+
+    await user.click(await screen.findByRole('button', { name: 'Show QR code' }));
+    const dialog = screen.getByRole('dialog');
+    await user.click(dialog);
+    expect(dialog).not.toHaveAttribute('open');
   });
 
   it('shows a not-found message for an unknown token', async () => {
