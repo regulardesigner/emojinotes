@@ -126,8 +126,12 @@ En testant en local après ce passage, un problème de plus est apparu : le port
 - `npm run check` : lint, format, types, 42 tests et build, tous verts.
 - Smoke test sur le vrai serveur : création et lecture d'une note, 404 sur la route de listing, fallback SPA, en-têtes de sécurité, cache des assets, `noindex`.
 - Captures Chrome headless en mobile et en desktop (accueil, saisie, lecture, partage).
-- Installation de production de l'image simulée (`npm ci --omit=dev --workspace server`) : seules les dépendances serveur sont installées, et le serveur refuse de démarrer sans `DATABASE_URL`.
-- **Non vérifié** : `docker build` / `docker compose up`, car le démon Docker n'était pas lancé. Ce build est couvert par le job `docker` de la CI.
+- Le serveur refuse de démarrer en production sans `DATABASE_URL`, avec un message clair.
+- **`docker build` + `docker compose up` avec Postgres 17** :
+  - création et lecture d'une note, 404 sur la route de listing, octet NUL rejeté, fallback SPA, vrai 404 sur un asset manquant, en-têtes CSP et HSTS présents ;
+  - les deux migrations sont appliquées et l'index unique existe en base ; après un redémarrage, les données sont conservées et les migrations ne sont pas rejouées ;
+  - conteneur `healthy`, processus lancé en utilisateur `node` (non-root), aucune dépendance de dev dans l'image (192 Mo) ;
+  - arrêt propre sur `SIGTERM` : moins d'une seconde, code de sortie 0.
 
 ## 5. Ce qu'il te reste à faire
 
