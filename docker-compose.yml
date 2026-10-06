@@ -1,0 +1,27 @@
+# Production-like stack: `docker compose up --build` then open http://localhost:3000
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgres://emojinotes:emojinotes@db:5432/emojinotes
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: emojinotes
+      POSTGRES_PASSWORD: emojinotes
+      POSTGRES_DB: emojinotes
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U emojinotes']
+      interval: 5s
+      retries: 10
+
+volumes:
+  db-data:
